@@ -1,0 +1,89 @@
+/* Definir estilos para o corpo do site */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Definir estilos para o título */
+  h1 {
+    font-size: 36px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Definir estilos para o formulário */
+  form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 40px;
+  }
+  
+  /* Definir estilos para as etiquetas do formulário */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Definir estilos para as caixas de entrada do formulário */
+  input[type="text"] {
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+   /* Definir estilos para o botão de ação do formulário */
+  input[type="button"] {
+    background-color: #e75f04;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  input[type="button"]:hover {
+    background-color: #3e8e41;
+  }
+   /* Definir estilos para as áreas de texto do formulário */
+  textarea {
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+  /* Definir estilos para a seção de resultados */
+  section {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 40px auto 0;
+    max-width: 600px;
+    padding: 20px;
+  }
+  /* Definir estilos para os resultados */
+  .resultado {
+    margin-bottom: 10px;
+  }
+  .resultado-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .resultado-texto {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }

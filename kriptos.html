@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <title>Criptografia - FUTUROON</title>
+    <h1>Criptografia FUTUROON</h1>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h1>Prof. Juliana Ianov</h1>
+    <form>
+      <label for="tamanho-chave">Tamanho da chave:</label>
+      <select id="tamanho-chave" name="tamanho-chave">
+        <option value="128">128 bits</option>
+        <option value="192">192 bits</option>
+        <option value="256">256 bits</option>
+      </select><br><br>
+      <label for="chave">Chave:</label>
+      <input type="text" id="chave" name="chave" readonly><br><br>
+      <label for="mensagem">Mensagem:</label>
+      <input type="text" id="mensagem" name="mensagem"><br><br>
+      <input type="button" value="Criptografar" onclick="criptografar()">
+      <input type="button" value="Limpar" onclick="limpar()"><br><br>
+      <div id="continuar">
+        <label>Guarde bem sua chave, você só pode descriptografar a mensagem com essa chave. Tem certeza que deseja continuar?</label>
+        <input type="button" value="Sim" onclick="continuar()">
+        <input type="button" value="Não" onclick="cancelar()">
+      </div>
+      <div id="descriptografar" style="display: none;">
+        <label for="chave-descriptografar">Digite a chave:</label>
+        <input type="text" id="chave-descriptografar" name="chave-descriptografar"><br><br>
+        <input type="button" value="Descriptografar" onclick="descriptografar()">
+        <input type="button" value="Limpar" onclick="limpar()"><br><br>
+        <label for="mensagem-criptografada">Mensagem criptografada:</label>
+        <textarea id="mensagem-criptografada" rows="5" cols="40" readonly></textarea><br><br>
+        <label for="mensagem-descriptografada">Mensagem descriptografada:</label>
+        <textarea id="mensagem-descriptografada" rows="5" cols="40" readonly></textarea><br><br>
+        <input type="button" value="Exibir mensagem descriptografada em nova janela" onclick="exibirMensagemDescriptografada()">
+      </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      function criptografar() {
+        var tamanhoChave = document.getElementById("tamanho-chave").value;
+        var chave = CryptoJS.lib.WordArray.random(parseInt(tamanhoChave) / 8).toString();
+        var mensagem = document.getElementById("mensagem").value;
+        var mensagemCriptografada = CryptoJS.AES.encrypt(mensagem, chave).toString();
+        document.getElementById("chave").value = chave;
+        document.getElementById("mensagem-criptografada").value = mensagemCriptografada;
+        document.getElementById("continuar").style.display = "block";
+      }
+
+      function continuar() {
+        var opcao = document.getElementById("tamanho-chave").value;
+var chave = document.getElementById("chave").value;
+document.getElementById("chave-descriptografar").value = chave;
+document.getElementById("descriptografar").style.display = "block";
+document.getElementById("mensagem").disabled = true;
+document.getElementById("mensagem-criptografada").disabled = true;
+document.getElementById("continuar").style.display = "none";
+}
+function cancelar() {
+    limpar();
+    document.getElementById("continuar").style.display = "none";
+  }
+
+  function descriptografar() {
+    var mensagemCriptografada = document.getElementById("mensagem-criptografada").value;
+    var chaveDescriptografar = document.getElementById("chave-descriptografar").value;
+    var mensagemDescriptografada = '';
+    try {
+      mensagemDescriptografada = CryptoJS.AES.decrypt(mensagemCriptografada, chaveDescriptografar).toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      mensagemDescriptografada = 'Erro ao descriptografar a mensagem: chave incorreta ou mensagem inválida.';
+    }
+    document.getElementById("mensagem-descriptografada").value = mensagemDescriptografada;
+  }
+
+  function exibirMensagemDescriptografada() {
+    var mensagemCriptografada = document.getElementById("mensagem-criptografada").value;
+    var chaveDescriptografar = document.getElementById("chave-descriptografar").value;
+    var mensagemDescriptografada = '';
+    try {
+      mensagemDescriptografada = CryptoJS.AES.decrypt(mensagemCriptografada, chaveDescriptografar).toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      mensagemDescriptografada = 'Erro ao descriptografar a mensagem: chave incorreta ou mensagem inválida.';
+    }
+    var win = window.open();
+    win.document.write('<html><body>');
+    win.document.write('<h1>Mensagem descriptografada:</h1>');
+    win.document.write('<p>' + mensagemDescriptografada + '</p>');
+    win.document.write('</body></html>');
+  }
+
+  function limpar() {
+    document.getElementById("tamanho-chave").selectedIndex = 0;
+    document.getElementById("chave").value = '';
+    document.getElementById("mensagem").value = '';
+    document.getElementById("mensagem-criptografada").value = '';
+    document.getElementById("mensagem-descriptografada").value = '';
+    document.getElementById("chave-descriptografar").value = '';
+    document.getElementById("mensagem").disabled = false;
+    document.getElementById("mensagem-criptografada").disabled = false;
+    document.getElementById("descriptografar").style.display = "none";
+    document.getElementById("continuar").style.display = "none";
+  }
+</script>
+</body>
+</html>
